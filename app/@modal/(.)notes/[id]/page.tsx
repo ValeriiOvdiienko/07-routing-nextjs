@@ -3,7 +3,6 @@ import {
   HydrationBoundary,
   dehydrate,
 } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 //
 import { fetchNoteById } from "@/lib/api";
 import NotePreviewClient from "@/app/notes/[id]/NoteDetails.client";
@@ -14,10 +13,6 @@ type Props = {
 };
 
 const NotePreview = async ({ params }: Props) => {
-  const router = useRouter();
-  const handleCloseModal = () => {
-    router.back();
-  };
   //
   const { id } = await params;
   const queryClient = new QueryClient();
