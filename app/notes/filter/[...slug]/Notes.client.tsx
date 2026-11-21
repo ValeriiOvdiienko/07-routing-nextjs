@@ -72,7 +72,7 @@ export function NotesClient({ tag }: NotesClientProps) {
             Create note +
           </button>
           {isModalOpen && (
-            <Modal>
+            <Modal onClose={closeModal}>
               <NoteForm onCancel={closeModal} />
             </Modal>
           )}

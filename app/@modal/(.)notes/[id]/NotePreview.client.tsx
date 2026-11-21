@@ -4,8 +4,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { fetchNoteById } from "@/lib/api";
 import css from "@/app/@modal/(.)notes/[id]/NotePreview.module.css";
+import Modal from "@/components/Modal/Modal";
+import { useRouter } from "next/navigation";
 
 export default function NotePreviewClient() {
+  const router = useRouter();
+  const handleCloseModal = () => {
+    router.back();
+  };
   const { id } = useParams<{ id: string }>();
 
   const {
@@ -22,17 +28,19 @@ export default function NotePreviewClient() {
   if (isError || !note) return <p>Something went wrong.</p>;
 
   return (
-    <main className={css.main}>
-      <div className={css.container}>
-        <div className={css.item}>
-          <div className={css.header}>
-            <h2>{note.title}</h2>
+    <Modal onClose={handleCloseModal}>
+      <main className={css.main}>
+        <div className={css.container}>
+          <div className={css.item}>
+            <div className={css.header}>
+              <h2>{note.title}</h2>
+            </div>
+            <p className={css.tag}>{note.tag}</p>
+            <p className={css.content}>{note.content}</p>
+            <p className={css.date}>{note.createdAt}</p>
           </div>
-          <p className={css.tag}>{note.tag}</p>
-          <p className={css.content}>{note.content}</p>
-          <p className={css.date}>{note.createdAt}</p>
         </div>
-      </div>
-    </main>
+      </main>
+    </Modal>
   );
 }
