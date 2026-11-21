@@ -6,7 +6,6 @@ import {
 //
 import { fetchNoteById } from "@/lib/api";
 import NotePreviewClient from "@/app/notes/[id]/NoteDetails.client";
-import Modal from "@/components/Modal/Modal";
 export const instant = false;
 type Props = {
   params: Promise<{ id: string }>;
@@ -24,9 +23,7 @@ const NotePreview = async ({ params }: Props) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Modal>
-        <NotePreviewClient />
-      </Modal>
+      <NotePreviewClient />
     </HydrationBoundary>
   );
 };
